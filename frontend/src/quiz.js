@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Leaderboard from './leaderboard';
-const API_BASE = '/api';
+const API_BASE = 'http://localhost:5000/api';
 
 function Quiz() {
   const [mode, setMode] = useState(null);
@@ -218,14 +218,15 @@ function Quiz() {
         textAlign: 'center',
         padding: '20px',
         minHeight: '100vh',
-        backgroundImage: 'url("/world-map.gif")',
+        backgroundImage: 'url("/wold-map.gif")',
+        backgroundColor: '#001f4d',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-      }}
+      }}//geography quiz
     >
-      <h1 style={{ color: 'darkblue' }}>Geography Quiz</h1>
-
+      <h1 style={{ color: 'darkblue' }}></h1>
+ 
       {!mode && (
         <>
           <button
