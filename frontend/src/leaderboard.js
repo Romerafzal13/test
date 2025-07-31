@@ -22,13 +22,13 @@ function Leaderboard({ onClose }) {
   if (loading) return <p>Loading leaderboard...</p>;
 
   return (
-    <div style={{ border: '2px solid navy', padding: '20px', borderRadius: '10px', backgroundColor: '#f0f8ff' }}>
-      <h2 style={{ color: 'darkblue' }}>🏆 Leaderboard</h2>
+    <div style={{ border: '2px solid navy', padding: '20px', borderRadius: '10px', backgroundColor: '#f0f8ff', color: '#cb9530ff'}}> 
+      <h2 style={{ color: 'salmon' }}>🏆 Leaderboard</h2>
       <table style={{ margin: 'auto', width: '80%', borderCollapse: 'collapse' }}>
         <thead>
-          <tr style={{ backgroundColor: '#d0e0ff' }}>
+          <tr style={{ backgroundColor: '#041331ff' }}>
             <th>User</th>
-            <th>Score</th>
+            <th>Score</th>  
             <th>Total</th>
             <th>%</th>
             <th>Mode</th>

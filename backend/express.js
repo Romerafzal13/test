@@ -41,12 +41,15 @@ fs.createReadStream('Data.csv')   // Adjust this path to match your structure
       pairs.push({
         country: row['CountryName'].trim(),
         capital: row['CapitalName'].trim(),
-        continent: row['ContinentName'].trim()
+        continent: row['ContinentName'].trim(),
+        lat: parseFloat(row['Latitude']),
+        lng: parseFloat(row['Longitude'])        
       });
     }
-  })
+  }) 
   .on('end', () => {
     console.log('CSV loaded. Total entries:', pairs.length);
+    //yooooooooooooooooo
   });
 
 
