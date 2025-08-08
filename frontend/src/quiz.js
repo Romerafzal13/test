@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Leaderboard from './leaderboard';
 import CountryMap from './countrymap';
 
-const API_BASE = 'http://localhost:5000/api';
+// frontend/src/quiz.js
+const API_BASE = process.env.REACT_APP_API_BASE || 'http://192.168.1.100:5000/api';
 
 function Quiz() {
   const [mode, setMode] = useState(null);
