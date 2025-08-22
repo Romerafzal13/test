@@ -1,56 +1,40 @@
-name: MERN Docker CI
+name: Build and Push Docker Images
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - main   # change if your default branch is different
 
 jobs:
-  build-and-test:
+  build-and-push:
     runs-on: ubuntu-latest
-    services:
-      mongo:
-        image: mongo:5.0
-        ports:
-          - 27017:27017
-        options: >-
-          --health-cmd "mongosh --eval 'db.runCommand({ ping: 1 })'"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      # Step 2: Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Optional: Log in to Docker Hub
-      # - name: Log in to Docker Hub
-      #   uses: docker/login-action@v3
-      #   with:
-      #     username: ${{ secrets.DOCKER_USERNAME }}
-      #     password: ${{ secrets.DOCKER_PASSWORD }}
+      # Step 3: Build and push backend image
+      - name: Build and Push Backend Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: your-dockerhub-username/backend:latest
 
-      - name: Build backend image
-        run: docker build -t mern-backend ./backend
-
-      - name: Build frontend image
-        run: docker build -t mern-frontend ./frontend
-
-      - name: Run backend container (test)
-        run: |
-          docker run --rm --network host -e MONGO_URL=mongodb://localhost:27017/testdb mern-backend npm test
-
-      - name: Run frontend container (test)
-        run: |
-          docker run --rm mern-frontend npm test
-
-      # Optional: Push images to Docker Hub
-      # - name: Push backend image
-      #   run: docker push yourusername/mern-backend:latest
-
-      # - name: Push frontend image
-      #   run: docker push yourusername/mern-frontend:latest
+      # Step 4: Build and push frontend image
+      - name: Build and Push Frontend Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: your-dockerhub-username/frontend:latest
