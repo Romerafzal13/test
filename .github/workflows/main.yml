@@ -28,7 +28,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: your-dockerhub-username/backend:latest
+          tags: omerafzal13/backend:latest
 
       # Step 4: Build and push frontend image
       - name: Build and Push Frontend Image
@@ -37,4 +37,4 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: your-dockerhub-username/frontend:latest
+          tags: omerafzal13/frontend:latest
